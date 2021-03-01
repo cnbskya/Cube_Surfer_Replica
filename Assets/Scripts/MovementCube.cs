@@ -4,33 +4,31 @@ using UnityEngine;
 
 public class MovementCube : MonoBehaviour
 {
-	public Rigidbody rb;
-	public float forwardSpeed;
-	public List<GameObject> stackCubes;
-	[Space(50)]
+	[Header("Components && Variables")]
 	public GameObject childPrefab;
+	[SerializeField] Rigidbody rb;
+	public float forwardSpeed;
+
+	[Header("Child Array")]
+	public List<GameObject> stackCubes;
+	
 
 	private void FixedUpdate()
 	{
-		rb.velocity = Vector3.forward * forwardSpeed * Time.deltaTime;
+		//rb.velocity = Vector3.forward * forwardSpeed * Time.deltaTime;
+		rb.AddForce(Vector3.forward * 50 * Time.deltaTime, ForceMode.Impulse);
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.CompareTag("Ground"))
-		{
-			Debug.Log("Çalıştı");
-			stackCubes.Remove(gameObject);
-			transform.SetParent(null);
-		}
 		if (collision.gameObject.CompareTag("BonusCube"))
 		{
 			AddBonusCube(collision);
-
+		}else if (collision.gameObject.CompareTag("Obstacle"))
+		{
+			GroundHit(collision);
 		}
 	}
-
-
 	public void AddBonusCube(Collision collision)
 	{
 		Destroy(collision.gameObject); // ÇARPTIĞIMIZ BONUS SİLİNDİ
@@ -39,8 +37,13 @@ public class MovementCube : MonoBehaviour
 		gameObject.transform.position = new Vector3(gameObject.transform.position.x, transform.position.y + go.transform.localScale.y, transform.position.z); // ONCEKİ DİZİ ELEMANLARI TOPLU ŞEKİLDE YUKARI ÇIKARILDI.
 		go.transform.SetParent(gameObject.transform); // YENİ EKLENEN OBJENİN HAREKETİ SAĞLAMASI İÇİN CHİLD YAPILDI
 		stackCubes.Add(go); // BİR SONRAKİ YER AYARLAMA İŞLEMİNİN DÜZGÜN OLMASI İÇİN DİZİYE EKLENDİ.
-		
 	}
 
 
+	public void GroundHit(Collision collision)
+	{
+		Collider myCollider = collision.contacts[0].thisCollider;
+		myCollider.transform.SetParent(null);
+		stackCubes.Remove(myCollider.gameObject);
+	}
 }
