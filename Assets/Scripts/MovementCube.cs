@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MovementCube : MonoBehaviour
 {
@@ -25,15 +26,6 @@ public class MovementCube : MonoBehaviour
 			AddBonusCube(other);
 		}
 	}
-	/*
-	private void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.CompareTag("Obstacle"))
-		{
-			GroundHit(collision);
-		}
-	}
-	*/
 	public void AddBonusCube(Collider collision)
 	{
 		Destroy(collision.gameObject); // ÇARPTIĞIMIZ BONUS SİLİNDİ
@@ -48,12 +40,4 @@ public class MovementCube : MonoBehaviour
 		trailerRendererObject.position = new Vector3(gameObject.transform.position.x, trailerRendererObject.transform.position.y - cloneCubeScale, transform.position.z); ; // TRAİLER RENDERERIN POZİSYONU SABİT TUTULDU.
 	}
 
-	/*
-	public void GroundHit(Collision collision)
-	{
-		Collider myCollider = collision.contacts[0].thisCollider;
-		myCollider.transform.SetParent(null);
-		stackCubes.Remove(myCollider.gameObject);
-	}
-	*/
 }
