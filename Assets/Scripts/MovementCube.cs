@@ -18,18 +18,21 @@ public class MovementCube : MonoBehaviour
 		//rb.velocity = Vector3.forward * forwardSpeed * Time.deltaTime;
 		rb.AddForce(Vector3.forward * 50 * Time.deltaTime, ForceMode.Impulse);
 	}
-
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("BonusCube"))
+		{
+			AddBonusCube(other);
+		}
+	}
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.CompareTag("BonusCube"))
-		{
-			AddBonusCube(collision);
-		}else if (collision.gameObject.CompareTag("Obstacle"))
+		if (collision.gameObject.CompareTag("Obstacle"))
 		{
 			GroundHit(collision);
 		}
 	}
-	public void AddBonusCube(Collision collision)
+	public void AddBonusCube(Collider collision)
 	{
 		Destroy(collision.gameObject); // ÇARPTIĞIMIZ BONUS SİLİNDİ
 		var go = Instantiate(childPrefab); // YENİ BİR GAMEOBJECT ÜRETİLDİ
