@@ -10,4 +10,9 @@ public class UIManager : MonoBehaviour
 	{
 		instance = this;
 	}
+
+	public void RestartGame()
+	{
+		Application.LoadLevel("SampleScene");
+	}
 }
