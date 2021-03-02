@@ -21,7 +21,7 @@ public class MovementCube : MonoBehaviour
 	void Start()
 	{
 		circle.transform.DORotate(new Vector3(0,-180,0), 4f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
-		circleTwo.transform.DORotate(new Vector3(0,-180,0), 3f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
+		circleTwo.transform.DORotate(new Vector3(0,-180,0), 2.5f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
 	}
 
 	private void Update()
