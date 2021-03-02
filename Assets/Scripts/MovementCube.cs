@@ -7,12 +7,22 @@ public class MovementCube : MonoBehaviour
 {
 	[Header("Components && Variables")]
 	public GameObject childPrefab;
+	[Header("Rotatable Object")]
+	public GameObject circle;
+	public GameObject circleTwo;
+	[Space(20)]
 	public Transform trailerRendererObject;
 	[SerializeField] Rigidbody rb;
 	public float forwardSpeed;
 
 	[Header("Child Array")]
 	public List<GameObject> stackCubes;
+
+	void Start()
+	{
+		circle.transform.DORotate(new Vector3(0,-180,0), 4f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
+		circleTwo.transform.DORotate(new Vector3(0,-180,0), 3f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
+	}
 
 	private void Update()
 	{
