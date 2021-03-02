@@ -1,6 +1,5 @@
-﻿
-using UnityEngine;
-
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
 	public static UIManager instance;
@@ -13,6 +12,6 @@ public class UIManager : MonoBehaviour
 
 	public void RestartGame()
 	{
-		Application.LoadLevel("SampleScene");
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }
