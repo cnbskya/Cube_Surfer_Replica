@@ -8,6 +8,7 @@ TagManager:
   - BonusCube
   - Obstacle
   - ChildCube
+  - CheckeredPanel
   layers:
   - Default
   - TransparentFX

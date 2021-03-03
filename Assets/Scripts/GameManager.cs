@@ -11,13 +11,14 @@ public class GameManager : MonoBehaviour
 		instance = this;
 	}
 
-	private void Start()
-	{
-		OnGameStart();
-	}
-
 	public void OnGameStart()
 	{
 		isGameOn = true;
+		UIManager.instance.StartedScreenUI();
+	}
+	public void OnGameFinish()
+	{
+		isGameOn = false;
+		UIManager.instance.FinishScreenUI();
 	}
 }

@@ -12,13 +12,13 @@ public class CameraFollowScript : MonoBehaviour
 	// Look Rotation
 	void LateUpdate()
     {
-        offset = new Vector3(5, 6, -9);
+        offset = new Vector3(4.5f, 6, -9);
         RePosition(offset);
 
 
         if (FindObjectOfType<MovementCube>().stackCubes.Count > 4 && FindObjectOfType<MovementCube>().stackCubes.Count <= 7)
 		{
-            offset = new Vector3(5, 4, -13);
+            offset = new Vector3(6, 4, -13);
             RePosition(offset);
         }
     }

@@ -7,6 +7,7 @@ public class MovementCube : MonoBehaviour
 {
 	[Header("Components && Variables")]
 	public GameObject childPrefab;
+	public Animator animator;
 	[Header("Rotatable Object")]
 	public GameObject circle;
 	public GameObject circleTwo;
@@ -20,13 +21,16 @@ public class MovementCube : MonoBehaviour
 
 	void Start()
 	{
-		circle.transform.DORotate(new Vector3(0,-180,0), 4f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
-		circleTwo.transform.DORotate(new Vector3(0,-180,0), 2.5f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
+		animator = GetComponent<Animator>();
+		CircleRotating(); // Rotateble object start
 	}
 
 	private void Update()
 	{
-		transform.position += Vector3.forward * Time.deltaTime * forwardSpeed;
+		if(GameManager.instance.isGameOn == true)
+		{
+			transform.position += Vector3.forward * Time.deltaTime * forwardSpeed;
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -34,6 +38,10 @@ public class MovementCube : MonoBehaviour
 		if (other.gameObject.CompareTag("BonusCube"))
 		{
 			AddBonusCube(other);
+		}
+		if (other.gameObject.CompareTag("CheckeredPanel"))
+		{
+			GameManager.instance.OnGameFinish();
 		}
 	}
 	public void AddBonusCube(Collider collision)
@@ -48,6 +56,11 @@ public class MovementCube : MonoBehaviour
 
 		float cloneCubeScale = go.transform.localScale.y;
 		trailerRendererObject.position = new Vector3(gameObject.transform.position.x, trailerRendererObject.transform.position.y - cloneCubeScale, transform.position.z); ; // TRAİLER RENDERERIN POZİSYONU SABİT TUTULDU.
+	}
+	public void CircleRotating()
+	{
+		circle.transform.DORotate(new Vector3(0, -180, 0), 4f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
+		circleTwo.transform.DORotate(new Vector3(0, -180, 0), 2.5f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
 	}
 
 }
