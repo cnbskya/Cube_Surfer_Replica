@@ -8,6 +8,7 @@ public class MovementCube : MonoBehaviour
 	[Header("Components && Variables")]
 	public GameObject childPrefab;
 	public Animator animator;
+	public GameObject trailRenderer;
 	[Header("Rotatable Object")]
 	public GameObject circle;
 	public GameObject circleTwo;
@@ -44,6 +45,8 @@ public class MovementCube : MonoBehaviour
 			GameManager.instance.OnGameFinish();
 		}
 	}
+
+	// --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS
 	public void AddBonusCube(Collider collision)
 	{
 		Destroy(collision.gameObject); // ÇARPTIĞIMIZ BONUS SİLİNDİ
