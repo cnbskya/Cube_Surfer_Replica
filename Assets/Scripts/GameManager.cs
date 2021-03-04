@@ -23,4 +23,9 @@ public class GameManager : MonoBehaviour
 		isGameOn = false;
 		UIManager.instance.FinishScreenUI();
 	}
+
+	public void LoadNextLevel()
+	{
+		Debug.Log("Loading Next Level, Please Waiting...");
+	}
 }
