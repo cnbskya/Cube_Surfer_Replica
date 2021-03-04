@@ -37,13 +37,13 @@ public class TouchController : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         Vector2 difVec = eventData.position - moveLastPos;
 
         //MOVEMENT
-        runn_e.position += new Vector3(difVec.x, 0f, 0f) * moveSensitivity;
+        runn_e.localPosition += new Vector3(difVec.x, 0f, 0f) * moveSensitivity;
         moveLastPos = eventData.position;
 
         //CLAMP
-        Vector3 clampedPos = runn_e.position;
-        clampedPos.x = Mathf.Clamp(clampedPos.x, minClampTr.position.x, maxClampTr.position.x);
-        runn_e.position = clampedPos;
+        Vector3 clampedPos = runn_e.localPosition;
+        clampedPos.x = Mathf.Clamp(clampedPos.x, minClampTr.localPosition.x, maxClampTr.localPosition.x);
+        runn_e.localPosition = clampedPos;
     }
 
     public void OnPointerUp(PointerEventData eventData)

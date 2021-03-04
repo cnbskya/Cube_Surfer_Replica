@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - ChildCube
   - CheckeredPanel
+  - RotatePoint
   layers:
   - Default
   - TransparentFX

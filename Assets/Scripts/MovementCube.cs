@@ -9,9 +9,11 @@ public class MovementCube : MonoBehaviour
 	public GameObject childPrefab;
 	public Animator animator;
 	public GameObject trailRenderer;
+
 	[Header("Rotatable Object")]
 	public GameObject circle;
 	public GameObject circleTwo;
+	
 	[Space(20)]
 	public Transform trailerRendererObject;
 	[SerializeField] Rigidbody rb;
@@ -30,7 +32,11 @@ public class MovementCube : MonoBehaviour
 	{
 		if(GameManager.instance.isGameOn == true)
 		{
-			transform.position += Vector3.forward * Time.deltaTime * forwardSpeed;
+			gameObject.GetComponentInParent<PathCreation.Examples.PathFollower>().speed = 10;
+		}
+		else
+		{
+			gameObject.GetComponentInParent<PathCreation.Examples.PathFollower>().speed = 0;
 		}
 	}
 
@@ -43,6 +49,10 @@ public class MovementCube : MonoBehaviour
 		if (other.gameObject.CompareTag("CheckeredPanel"))
 		{
 			GameManager.instance.OnGameFinish();
+		}
+		if (other.gameObject.CompareTag("RotatePoint"))
+		{
+			Roundabout(other);
 		}
 	}
 
@@ -63,7 +73,19 @@ public class MovementCube : MonoBehaviour
 	public void CircleRotating()
 	{
 		circle.transform.DORotate(new Vector3(0, -180, 0), 4f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
-		circleTwo.transform.DORotate(new Vector3(0, -180, 0), 2.5f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
+		circleTwo.transform.DORotate(new Vector3(0, -180, 0), 4f, RotateMode.Fast).SetLoops(-1).SetEase(Ease.Linear);
+	}
+
+	public void Roundabout(Collider other)
+	{
+		GameManager.instance.isRotate = true;
+		GameManager.instance.rotateClamp = true;
+		FindObjectOfType<CameraFollowScript>().transform.SetParent(gameObject.transform);
+		GameManager.instance.isGameOn = false;
+		transform.DORotate(new Vector3(0, -90, 0), 0.3f).OnComplete(() => {
+			GameManager.instance.isGameOn = true;
+			FindObjectOfType<CameraFollowScript>().transform.SetParent(null);
+		} );
 	}
 
 }

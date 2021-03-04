@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance;
 	[Header("GAME CONTROL BOOL")]
 	public bool isGameOn;
+	public bool rotateClamp = false;
+	public bool isRotate = false;
 
 	private void Awake()
 	{
