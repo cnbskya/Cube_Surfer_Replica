@@ -43,6 +43,11 @@ public class MovementCube : MonoBehaviour
 		{
 			GameManager.instance.OnGameFinish();
 		}
+		if (other.gameObject.CompareTag("CheckRotate"))
+		{
+			FindObjectOfType<CameraFollowScript>().CameraReposition();
+			GameManager.instance.isRotate = true;
+		}
 	}
 
 	// --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS --------FUNCTIONS
