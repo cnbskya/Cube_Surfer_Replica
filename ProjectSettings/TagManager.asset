@@ -10,6 +10,7 @@ TagManager:
   - ChildCube
   - CheckeredPanel
   - RotatePoint
+  - CheckRotate
   layers:
   - Default
   - TransparentFX

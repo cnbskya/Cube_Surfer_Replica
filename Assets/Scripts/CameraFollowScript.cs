@@ -24,6 +24,10 @@ public class CameraFollowScript : MonoBehaviour
                 RePosition(offset);
             }
 		}
+		else
+		{
+
+        }
     }
 
     public void RePosition(Vector3 offset)
